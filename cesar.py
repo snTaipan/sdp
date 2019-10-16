@@ -12,26 +12,13 @@ def encrypt_caesar(plaintext: str) -> str :
     i = 0
     ciphertext = ""
     while i < len(plaintext) :
-        if ord(plaintext[i]) < 65 or 90 < ord(plaintext[i]) < 97 or ord(plaintext[i]) > 122 : 
-                ciphertext = ciphertext + plaintext[i]
-        else :  
-            if plaintext[i] == 'X':
-                word = 'A'
-            elif plaintext[i] == 'Y':
-                word = 'B' 
-            elif plaintext[i] == 'Z':
-                word = 'C' 
-            elif plaintext[i] == 'x':
-                word = 'a'
-            elif plaintext[i] == 'y':
-                word = 'b' 
-            elif plaintext[i] == 'z':
-                word = 'c' 
-            else:
-                s = ord(plaintext[i])
-                s = s+3
-                word = chr(s)
-            ciphertext = ciphertext + word
+        if 'a' <= plaintext[i] <= 'z' or 'A' <= plaintext[i] <= 'Z':
+            s = ord(plaintext[i]) + 3
+            if s > ord('Z') and s < ord('a') or s > ord('z') :
+                s = s - 26
+            ciphertext = ciphertext + chr(s)
+        else:
+            ciphertext = ciphertext + plaintext[i]
         i = i+1
     return(ciphertext)
 
@@ -49,26 +36,13 @@ def decrypt_caesar(ciphertext: str) -> str :
     i = 0
     plaintext = ""
     while i < len(ciphertext) :
-        if ord(ciphertext[i]) < 65 or 90 < ord(ciphertext[i]) < 97 or ord(ciphertext[i]) > 122 : 
-                plaintext = plaintext + ciphertext[i]
-        else :   
-            if ciphertext[i] == 'A':
-                word = 'X'
-            elif ciphertext[i] == 'B':
-                word = 'Y' 
-            elif ciphertext[i] == 'C':
-                word = 'Z' 
-            elif ciphertext[i] == 'a':
-                word = 'x'
-            elif ciphertext[i] == 'b':
-                word = 'y' 
-            elif ciphertext[i] == 'c':
-                word = 'z' 
-            else:
-                s = ord(ciphertext[i])
-                s = s-3
-                word = chr(s)
-            plaintext = plaintext + word
+        if 'a' <= ciphertext[i] <= 'z' or 'A' <= ciphertext[i] <= 'Z' :
+            s = ord(ciphertext[i]) - 3
+            if s < ord('a') and s > ord('Z') or s < ord('A'):
+                s = s + 26
+            plaintext = plaintext + chr(s)
+        else :
+            plaintext = plaintext + ciphertext[i]
         i = i+1
     return(plaintext)
 

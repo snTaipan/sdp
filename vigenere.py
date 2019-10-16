@@ -4,7 +4,6 @@ keyword = input("Enter a keyword : ")
 def encrypt_vigenere(plaintext: str, keyword: str) -> str :
         
     """
-
     >>> encrypt_vigenere("PYTHON", "A")
     'PYTHON'
     >>> encrypt_vigenere("python", "a")
@@ -24,23 +23,20 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str :
             i += 1
     i = 0
     while i < len(plaintext) :
-        size = plaintext[i].islower()
-        if ord(plaintext[i]) < 65 or 90 < ord(plaintext[i]) < 97 or ord(plaintext[i]) > 122 : 
-                    ciphertext = ciphertext + plaintext[i]
+        if ord('A') > ord(plaintext[i]) or ord('Z') < ord(plaintext[i]) < ord('a') or ord(plaintext[i]) > ord('z') :
+            ciphertext += plaintext[i]
         else:
-            meme = ord(keyword[i])
-            if meme < 91 and meme > 64 :
-                meme -= 65
-            elif meme < 123 and meme > 96 :
-                meme -= 97
-            promejytochnoe = ord(plaintext[i])
-            promejytochnoe += meme
-            if promejytochnoe > 90 and size == False :
-                promejytochnoe -= 26
-            elif promejytochnoe > 122 and size == True :
-                promejytochnoe -= 26
-            word = chr(promejytochnoe)
-            ciphertext = ciphertext + word
+            s = ord(keyword[i])
+            if s < (ord('Z') + 1) and s > (ord('A') - 1) :
+                s -= ord('A')
+            elif s < (ord('z') + 1) and s > (ord('a') - 1) :
+                s -= ord('a')
+            s += ord(plaintext[i])
+            if 'a' <= plaintext[i] <= 'z' and s > ord('z'):
+                s -= 26
+            elif 'A' <= plaintext[i] <= 'Z' and s > ord('Z') :
+                s -= 26
+            ciphertext += chr(s)
         i += 1
     return (ciphertext)
 
@@ -67,23 +63,21 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str :
             i += 1
     i = 0
     while i < len(ciphertext) :
-        size = ciphertext[i].islower()
-        if ord(ciphertext[i]) < 65 or 90 < ord(ciphertext[i]) < 97 or ord(ciphertext[i]) > 122 : 
-                    plaintext = plaintext + ciphertext[i]
+        if ord('A') > ord(ciphertext[i]) or ord('Z') < ord(ciphertext[i]) < ord('a') or ord(ciphertext[i]) > ord('z') :
+            plaintext += ciphertext[i]
         else:
-            meme = ord(keyword[i])
-            if meme < 91 and meme > 64 :
-                meme -= 65
-            elif meme < 123 and meme > 96 :
-                meme -= 97
-            promejytochnoe = ord(ciphertext[i])
-            promejytochnoe -= meme
-            if size == False and  promejytochnoe < 65  :
-                promejytochnoe += 26
-            elif size == True and promejytochnoe < 97 :
-                promejytochnoe += 26
-            word = chr(promejytochnoe)
-            plaintext = plaintext + word
+            size = ciphertext[i].islower()
+            s = ord(keyword[i])
+            if s < (ord('Z') + 1) and s > (ord('A') - 1) :
+                s -= ord('A')
+            elif s < (ord('z') + 1) and s > (ord('a') - 1) :
+                s -= ord('a')
+            s = ord(ciphertext[i]) - s
+            if size == False and s < ord('A')  :
+                s += 26
+            elif size == True and s < ord('a') :
+                s += 26
+            plaintext += chr(s)
         i += 1
     return (plaintext)
 
@@ -91,5 +85,3 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str :
 
 print (encrypt_vigenere(plaintext, keyword))
 print (decrypt_vigenere(ciphertext, keyword))
-
-
