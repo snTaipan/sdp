@@ -1,6 +1,7 @@
 import random
 
-def is_prime(n):
+
+def is_prime(n) -> bool:
     """
     Tests to see if a number is prime.
     >>> is_prime(2)
@@ -10,15 +11,13 @@ def is_prime(n):
     >>> is_prime(8)
     False
     """
-    
-    if (n == 1 or n == 0):
-        return False
-
-    for i in range(2, n):
-        if(n % i == 0):
+    if (n == 1 or n == 2 or n == 3):
+        return True
+    for l in range(2, n-1):
+        if (n % l == 0):
             return False
-
     return True
+
 
 def gcd(a, b):
     """
@@ -28,10 +27,12 @@ def gcd(a, b):
     >>> gcd(3, 7)
     1
     """
-    if b == 0:
-        return a
-    else:
-        return gcd(b, a%b)
+    while a != b:
+        if a > b:
+            a = a - b
+        else:
+            b = b - a
+    return a
 
 
 def multiplicative_inverse(e, phi):
@@ -41,13 +42,13 @@ def multiplicative_inverse(e, phi):
     >>> multiplicative_inverse(7, 40)
     23
     """
-    x, xx, y, yy, phi1= 1, 0, 0, 1, phi
+    x, xx, y, yy, phi1 = 1, 0, 0, 1, phi
     while phi:
         q = e // phi
         e, phi = phi, e % phi
         x, xx = xx, x - xx*q
         y, yy = yy, y - yy*q
-    x=x % phi1   
+    x = x % phi1
     return (x)
 
 

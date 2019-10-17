@@ -1,4 +1,4 @@
-def encrypt_caesar(plaintext: str) -> str :
+def encrypt_caesar(plaintext: str) -> str:
     """
     >>> encrypt_caesar("PYTHON")
     'SBWKRQ'
@@ -11,10 +11,10 @@ def encrypt_caesar(plaintext: str) -> str :
     """
     i = 0
     ciphertext = ""
-    while i < len(plaintext) :
+    while i < len(plaintext):
         if 'a' <= plaintext[i] <= 'z' or 'A' <= plaintext[i] <= 'Z':
             s = ord(plaintext[i]) + 3
-            if s > ord('Z') and s < ord('a') or s > ord('z') :
+            if s > ord('Z') and s < ord('a') or s > ord('z'):
                 s = s - 26
             ciphertext = ciphertext + chr(s)
         else:
@@ -22,7 +22,8 @@ def encrypt_caesar(plaintext: str) -> str :
         i = i+1
     return(ciphertext)
 
-def decrypt_caesar(ciphertext: str) -> str :
+
+def decrypt_caesar(ciphertext: str) -> str:
     """
     >>> decrypt_caesar("SBWKRQ")
     'PYTHON'
@@ -35,19 +36,20 @@ def decrypt_caesar(ciphertext: str) -> str :
     """
     i = 0
     plaintext = ""
-    while i < len(ciphertext) :
-        if 'a' <= ciphertext[i] <= 'z' or 'A' <= ciphertext[i] <= 'Z' :
+    while i < len(ciphertext):
+        if 'a' <= ciphertext[i] <= 'z' or 'A' <= ciphertext[i] <= 'Z':
             s = ord(ciphertext[i]) - 3
             if s < ord('a') and s > ord('Z') or s < ord('A'):
                 s = s + 26
             plaintext = plaintext + chr(s)
-        else :
+        else:
             plaintext = plaintext + ciphertext[i]
         i = i+1
     return(plaintext)
 
+
 plaintext = input("Enter a word: ")
 ciphertext = encrypt_caesar(plaintext)
-print (ciphertext)
+print(ciphertext)
 plaintext = decrypt_caesar(ciphertext)
-print (plaintext)
+print(plaintext)
