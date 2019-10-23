@@ -33,7 +33,8 @@ def display(grid: List[List[str]]) -> None:
             print(line)
     print()
 
-    def get_row(grid: List[List[str]], pos: Tuple[int, int]) -> List[str]:
+    
+def get_row(grid: List[List[str]], pos: Tuple[int, int]) -> List[str]:
     """ Возвращает все значения для номера строки, указанной в pos
     >>> get_row([['1', '2', '.'], ['4', '5', '6'], ['7', '8', '9']], (0, 0))
     ['1', '2', '.']
